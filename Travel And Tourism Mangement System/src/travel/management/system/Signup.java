@@ -3,12 +3,15 @@ package travel.management.system;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
 import javax.swing.*;
 
 public class Signup extends JFrame implements ActionListener{
 	
 	JButton b1,b2;
+	JTextField t1,t2,t3,t4;
+	Choice c1;
 	
 	Signup(){
 		
@@ -27,7 +30,7 @@ public class Signup extends JFrame implements ActionListener{
 		l1.setFont(new Font("Tahoma",Font.BOLD,14));
 		p1.add(l1);
 		
-		JTextField t1 = new JTextField();
+		t1 = new JTextField();
 		t1.setBounds(200,20,180,20);
 		t1.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t1);
@@ -37,7 +40,7 @@ public class Signup extends JFrame implements ActionListener{
 		l2.setFont(new Font("Tahoma",Font.BOLD,14));
 		p1.add(l2);
 		
-		JTextField t2 = new JTextField();
+		t2 = new JTextField();
 		t2.setBounds(200,60,180,20);
 		t2.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t2);
@@ -47,7 +50,7 @@ public class Signup extends JFrame implements ActionListener{
 		l3.setFont(new Font("Tahoma",Font.BOLD,14));
 		p1.add(l3);
 		
-		JTextField t3 = new JTextField();
+		t3 = new JTextField();
 		t3.setBounds(200,100,180,20);
 		t3.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t3);
@@ -57,7 +60,7 @@ public class Signup extends JFrame implements ActionListener{
 		l4.setFont(new Font("Tahoma",Font.BOLD,14));
 		p1.add(l4);
 		
-		Choice c1 = new Choice();
+		c1 = new Choice();
 		c1.add("Your favourite drama character?");
 		c1.add("Your pet name?");
 		c1.add("Your birth city?");
@@ -70,7 +73,7 @@ public class Signup extends JFrame implements ActionListener{
 		l5.setFont(new Font("Tahoma",Font.BOLD,14));
 		p1.add(l5);
 		
-		JTextField t4 = new JTextField();
+		t4 = new JTextField();
 		t4.setBounds(200,180,180,20);
 		t4.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t4);
@@ -116,6 +119,34 @@ public class Signup extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent ae) {
 		
 		if(ae.getSource() == b1) {
+			
+			String username = t1.getText();
+			String name = t2.getText();
+			String password = t3.getText();
+			String choice = c1.getSelectedItem();
+			String answer = t4.getText();
+			
+			String query = "INSERT INTO account VALUES(?,?,?,?,?)";
+			
+			try {
+				
+				Conn conn = new Conn();
+				PreparedStatement stmt=conn.c.prepareStatement(query);
+				
+				stmt.setString(1, username);
+				stmt.setString(2, name);
+				stmt.setString(3, password);
+				stmt.setString(4, choice);
+				stmt.setString(5, answer);
+				
+				stmt.executeUpdate();
+				JOptionPane.showMessageDialog(null,"Account Created Successfully");
+				this.setVisible(false);
+				new Login().setVisible(true);;
+				
+			}catch(Exception e) {
+				JOptionPane.showMessageDialog(null,e);
+			}
 			
 		}
 		else if(ae.getSource() == b2) {
