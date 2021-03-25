@@ -3,12 +3,15 @@ package travel.management.system;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 import javax.swing.*;
 
 public class Login extends JFrame implements ActionListener{
 	
 	JButton b1,b2,b3;
+	JTextField t1;
+	JPasswordField t2;
 	
 	Login(){
 		setLayout(null); //Default - BorderLayout
@@ -39,7 +42,7 @@ public class Login extends JFrame implements ActionListener{
 		l2.setFont(new Font("SAN_SERIF",Font.PLAIN,15));
 		p2.add(l2);
 		
-		JTextField t1 = new JTextField();
+		t1 = new JTextField();
 		t1.setBounds(50,50,250,25);
 		t1.setBorder(BorderFactory.createEmptyBorder());
 		p2.add(t1);
@@ -49,7 +52,7 @@ public class Login extends JFrame implements ActionListener{
 		l3.setFont(new Font("SAN_SERIF",Font.PLAIN,15));
 		p2.add(l3);
 		
-		JPasswordField t2 = new JPasswordField();
+		t2 = new JPasswordField();
 		t2.setBounds(50,120,250,25);
 		t2.setBorder(BorderFactory.createEmptyBorder());
 		p2.add(t2);
@@ -92,7 +95,31 @@ public class Login extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == b1) {
+			Conn conn = new Conn();
 			
+			try {
+				String username = t1.getText();
+				String password = t2.getText();
+				String query = "Select * from account where username = ? and password = ?";
+				
+				PreparedStatement stmt = conn.c.prepareStatement(query);
+				
+				stmt.setString(1, username);
+				stmt.setString(2, password);
+				
+				ResultSet rs = stmt.executeQuery();
+				
+				if(rs.next()) {
+					this.setVisible(false);
+					new Loading(username);
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Invalid Login");
+				}
+				
+			}catch(Exception e) {
+				
+			}
 		}
 		else if(ae.getSource() == b2) {
 			this.setVisible(false);
