@@ -49,16 +49,16 @@ public class Loading extends JFrame implements Runnable{
 		
 		try {
 			
-			for(int i=1; i<=100; i++) {
+			for(int i=1; i<=102; i++) {
 				int m = p.getMaximum();
 				int n = p.getValue();
 				
 				if(n < m)
 					p.setValue(n + 1);
 				else {
-					i = 101;
+					i = 102;
 					setVisible(false);
-					//Home
+					new Dashboard();
 				}
 				
 				Thread.sleep(50);
