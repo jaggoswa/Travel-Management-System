@@ -9,9 +9,12 @@ import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener{
 	
-	JButton b13,b14;
+	JButton b1,b2,b3,b13,b14;
+	String username;
 	
-	public Dashboard() {
+	public Dashboard(String username) {
+		
+		this.username = username;
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLayout(null);
@@ -34,7 +37,7 @@ public class Dashboard extends JFrame implements ActionListener{
 		p2.setBackground(new Color(0,0,102));
 		add(p2);
 		
-		JButton b1 = new JButton("Add Personal Details");
+		b1 = new JButton("Add Personal Details");
 //		b1.setMargin(new Insets(0,0,0,50));
 		b1.setBackground(new Color(0,0,102));
 		b1.setForeground(Color.WHITE);
@@ -42,23 +45,26 @@ public class Dashboard extends JFrame implements ActionListener{
 		b1.setBorder(BorderFactory.createBevelBorder(0));
 		b1.setBounds(0,0,200,35);
 		b1.setVisible(true);
+		b1.addActionListener(this);
 		p2.add(b1);
 		
-		JButton b2 = new JButton("Update Personal Details");
+		b2 = new JButton("Update Personal Details");
 		b2.setBackground(new Color(0,0,102));
 		b2.setForeground(Color.WHITE);
 		b2.setOpaque(true);
 		b2.setBorder(BorderFactory.createBevelBorder(0));
 		b2.setBounds(0,35,200,35);
+		b2.addActionListener(this);
 		p2.add(b2);
 
 		
-		JButton b3 = new JButton("View Details");
+		b3 = new JButton("View Details");
 		b3.setBackground(new Color(0,0,102));
 		b3.setForeground(Color.WHITE);
 		b3.setOpaque(true);
 		b3.setBorder(BorderFactory.createBevelBorder(0));
 		b3.setBounds(0,70,200,35);
+		b3.addActionListener(this);
 		p2.add(b3);
 
 		
@@ -181,7 +187,16 @@ public class Dashboard extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent ae) {
 		
-		if(ae.getSource() == b13) {
+		if(ae.getSource() == b1) {
+			new AddCustomer(username);
+		}
+		else if(ae.getSource() == b2) {
+			new UpdateCustomer(username);
+		}
+		else if(ae.getSource() == b3){
+			new ViewCustomer(username);
+		}
+		else if(ae.getSource() == b13) {
 			try {
 				String[] path = {"open","/System/Applications/Calculator.app"} ;
 				Runtime.getRuntime().exec(path, null, new File("/System/Applications/"));
@@ -198,7 +213,7 @@ public class Dashboard extends JFrame implements ActionListener{
 
 	public static void main(String[] args) {
 		
-		new Dashboard();
+		new Dashboard("");
 
 	}
 

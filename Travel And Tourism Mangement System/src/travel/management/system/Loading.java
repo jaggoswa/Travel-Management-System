@@ -8,14 +8,18 @@ public class Loading extends JFrame implements Runnable{
 	
 	JProgressBar p;
 	Thread t;
+	String username;
 	
-	public Loading(String username) {
+	public Loading(String user) {
 		
+		username = user;
+				
 		t = new Thread(this);
 		
 		setLayout(null);
 		setBounds(450,200,500,300);
 		getContentPane().setBackground(Color.WHITE);
+		setUndecorated(true);
 		
 		JLabel l1 = new JLabel("Travel And Tourism Application");
 		l1.setBounds(50,20,500,50);
@@ -58,7 +62,7 @@ public class Loading extends JFrame implements Runnable{
 				else {
 					i = 102;
 					setVisible(false);
-					new Dashboard();
+					new Dashboard(username);
 				}
 				
 				Thread.sleep(50);
