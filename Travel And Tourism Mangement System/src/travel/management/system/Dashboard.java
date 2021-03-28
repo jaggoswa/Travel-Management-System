@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener{
 	
-	JButton b1,b2,b3,b13,b14;
+	JButton b1,b2,b3,b5,b6,b7,b8,b11,b13,b14;
 	String username;
 	
 	public Dashboard(String username) {
@@ -77,36 +77,40 @@ public class Dashboard extends JFrame implements ActionListener{
 		p2.add(b4);
 
 		
-		JButton b5 = new JButton("Check Package");
+		b5 = new JButton("Check Package");
 		b5.setBackground(new Color(0,0,102));
 		b5.setForeground(Color.WHITE);
 		b5.setOpaque(true);
 		b5.setBorder(BorderFactory.createBevelBorder(0));
 		b5.setBounds(0,140,200,35);
+		b5.addActionListener(this);
 		p2.add(b5);
 		
-		JButton b6 = new JButton("Book Package");
+		b6 = new JButton("Book Package");
 		b6.setBackground(new Color(0,0,102));
 		b6.setForeground(Color.WHITE);
 		b6.setOpaque(true);
 		b6.setBorder(BorderFactory.createBevelBorder(0));
 		b6.setBounds(0,175,200,35);
+		b6.addActionListener(this);
 		p2.add(b6);
 		
-		JButton b7 = new JButton("View Package");
+		b7 = new JButton("View Package");
 		b7.setBackground(new Color(0,0,102));
 		b7.setForeground(Color.WHITE);
 		b7.setOpaque(true);
 		b7.setBorder(BorderFactory.createBevelBorder(0));
 		b7.setBounds(0,210,200,35);
+		b7.addActionListener(this);
 		p2.add(b7);
 		
-		JButton b8 = new JButton("View Hotels");
+		b8 = new JButton("View Hotels");
 		b8.setBackground(new Color(0,0,102));
 		b8.setForeground(Color.WHITE);
 		b8.setOpaque(true);
 		b8.setBorder(BorderFactory.createBevelBorder(0));
 		b8.setBounds(0,245,200,35);
+		b8.addActionListener(this);
 		p2.add(b8);
 		
 		JButton b9 = new JButton("Book Hotel");
@@ -125,12 +129,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		b10.setBounds(0,315,200,35);
 		p2.add(b10);
 		
-		JButton b11 = new JButton("Destinations");
+		b11 = new JButton("Destinations");
 		b11.setBackground(new Color(0,0,102));
 		b11.setForeground(Color.WHITE);
 		b11.setOpaque(true);
 		b11.setBorder(BorderFactory.createBevelBorder(0));
 		b11.setBounds(0,350,200,35);
+		b11.addActionListener(this);
 		p2.add(b11);
 		
 		JButton b12 = new JButton("Payment");
@@ -195,6 +200,21 @@ public class Dashboard extends JFrame implements ActionListener{
 		}
 		else if(ae.getSource() == b3){
 			new ViewCustomer(username);
+		}
+		else if(ae.getSource() == b5) {
+			new CheckPackage();
+		}
+		else if(ae.getSource() == b6) {
+			new BookPackage(username);
+		}
+		else if(ae.getSource() == b7) {
+			new ViewPackage(username);
+		}
+		else if(ae.getSource() == b8) {
+			new CheckHotels();
+		}
+		else if(ae.getSource() == b11) {
+			new Destinations();
 		}
 		else if(ae.getSource() == b13) {
 			try {
