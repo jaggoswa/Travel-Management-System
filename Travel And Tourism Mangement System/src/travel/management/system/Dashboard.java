@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class Dashboard extends JFrame implements ActionListener{
 	
-	JButton b1,b2,b3,b5,b6,b7,b8,b11,b13,b14;
+	JButton b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15;
 	String username;
 	
 	public Dashboard(String username) {
@@ -68,12 +68,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		p2.add(b3);
 
 		
-		JButton b4 = new JButton("Delete Personal Details");
+		b4 = new JButton("Delete Personal Details");
 		b4.setBackground(new Color(0,0,102));
 		b4.setForeground(Color.WHITE);
 		b4.setOpaque(true);
 		b4.setBorder(BorderFactory.createBevelBorder(0));
 		b4.setBounds(0,105,200,35);
+		b4.addActionListener(this);
 		p2.add(b4);
 
 		
@@ -113,20 +114,22 @@ public class Dashboard extends JFrame implements ActionListener{
 		b8.addActionListener(this);
 		p2.add(b8);
 		
-		JButton b9 = new JButton("Book Hotel");
+		b9 = new JButton("Book Hotel");
 		b9.setBackground(new Color(0,0,102));
 		b9.setForeground(Color.WHITE);
 		b9.setOpaque(true);
 		b9.setBorder(BorderFactory.createBevelBorder(0));
 		b9.setBounds(0,280,200,35);
+		b9.addActionListener(this);
 		p2.add(b9);
 		
-		JButton b10 = new JButton("View Booked Hotel");
+		b10 = new JButton("View Booked Hotel");
 		b10.setBackground(new Color(0,0,102));
 		b10.setForeground(Color.WHITE);
 		b10.setOpaque(true);
 		b10.setBorder(BorderFactory.createBevelBorder(0));
 		b10.setBounds(0,315,200,35);
+		b10.addActionListener(this);
 		p2.add(b10);
 		
 		b11 = new JButton("Destinations");
@@ -138,12 +141,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		b11.addActionListener(this);
 		p2.add(b11);
 		
-		JButton b12 = new JButton("Payment");
+		b12 = new JButton("Payment");
 		b12.setBackground(new Color(0,0,102));
 		b12.setForeground(Color.WHITE);
 		b12.setOpaque(true);
 		b12.setBorder(BorderFactory.createBevelBorder(0));
 		b12.setBounds(0,385,200,35);
+		b12.addActionListener(this);
 		p2.add(b12);
 		
 		b13 = new JButton("Calculator");
@@ -164,12 +168,13 @@ public class Dashboard extends JFrame implements ActionListener{
 		b14.addActionListener(this);
 		p2.add(b14);
 		
-		JButton b15 = new JButton("About");
+		b15 = new JButton("About");
 		b15.setBackground(new Color(0,0,102));
 		b15.setForeground(Color.WHITE);
 		b15.setOpaque(true);
 		b15.setBorder(BorderFactory.createBevelBorder(0));
 		b15.setBounds(0,490,200,35);
+		b15.addActionListener(this);
 		p2.add(b15);
 		
 		String filepath = "travel/management/system/icons/home.jpg";
@@ -201,6 +206,9 @@ public class Dashboard extends JFrame implements ActionListener{
 		else if(ae.getSource() == b3){
 			new ViewCustomer(username);
 		}
+		else if(ae.getSource() == b4){
+			new DeleteCustomer(username);
+		}
 		else if(ae.getSource() == b5) {
 			new CheckPackage();
 		}
@@ -213,8 +221,17 @@ public class Dashboard extends JFrame implements ActionListener{
 		else if(ae.getSource() == b8) {
 			new CheckHotels();
 		}
+		else if(ae.getSource() == b9) {
+			new BookHotel(username);
+		}
+		else if(ae.getSource() == b10) {
+			new ViewBookedHotel(username);
+		}
 		else if(ae.getSource() == b11) {
 			new Destinations();
+		}
+		else if(ae.getSource() == b12) {
+			new Payment();
 		}
 		else if(ae.getSource() == b13) {
 			try {
@@ -227,6 +244,9 @@ public class Dashboard extends JFrame implements ActionListener{
 				String[] path = {"open","/System/Applications/TextEdit.app"};
 				Runtime.getRuntime().exec(path, null, new File("/System/Applications/"));
 			}catch(Exception e) {}
+		}
+		else if(ae.getSource() == b15) {
+			new About();
 		}
 		
 	}
